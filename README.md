@@ -21,7 +21,7 @@ npm run build
 npm run dev
 ```
 
-Após a instalação bem-sucedida, mantenha e versionе o package-lock.json. As dependências diretas estão fixadas. O primeiro build e a validação visual ainda precisam ser concluídos: a rede do ambiente impediu a instalação dos pacotes.
+Após a instalação bem-sucedida, mantenha e versionе o package-lock.json. As dependências diretas estão fixadas. O build inicial e os testes locais passaram. As dependências de Vite e React Router foram atualizadas após a auditoria. O workflow no GitHub valida as versões corrigidas e mantém o relatório em docs/dependency-audit.json. A validação visual e o fluxo de autenticação no domínio publicado ainda estão pendentes.
 
 Copie .env.example para .env e preencha a URL e a chave **publishable** do Supabase. Neste computador, .env já está configurado e é ignorado pelo Git. Nunca use service_role no cliente.
 
@@ -35,7 +35,7 @@ Cada conta representa uma empresa. Todas usam user_id = auth.uid() nas política
 A aplicação não oferece exclusão permanente nesta versão. Contas de equipe, convites e permissões por cargo ainda não foram implementados.
 
 ## Publicação gratuita
-1. Criar repositório público flowpay no GitHub e enviar o conteúdo desta pasta, sem .env e sem node_modules.
+1. Repositório público criado: https://github.com/Luca5-santos/flowpay. O código já foi enviado, sem .env e sem node_modules.
 2. Depois do build e dos testes, conectar esse repositório no Cloudflare Pages.
 3. Branch: main. Build: npm run build. Diretório de saída: dist. Node: 22.
 4. Configurar VITE_SUPABASE_URL e VITE_SUPABASE_PUBLISHABLE_KEY no build do Pages.
@@ -51,10 +51,10 @@ public/_redirects atende as rotas do React Router. public/_headers adiciona cabe
 - Supabase Security Advisors: nenhum aviso no momento da verificação.
 
 ## Pendências antes de liberar para usuários
-- Instalar dependências, gerar lockfile, passar o compilador e build.
+- Confirmar a conclusão do workflow de segurança, testes e build para o commit mais recente.
 - Validar layout desktop/mobile, formulários e impressão no navegador.
 - Validar o fluxo completo de Auth, inclusive e-mail e redirects.
-- Criar o repositório remoto, publicar e testar a versão Cloudflare.
+- Autorizar o acesso do Cloudflare somente ao repositório flowpay, publicar e testar a versão Cloudflare.
 - Revisar atualização/auditoria das dependências antes da liberação pública.
 - A consulta atual carrega até o limite padrão de linhas do Supabase por tabela. Paginação será necessária para contas maiores.
 
