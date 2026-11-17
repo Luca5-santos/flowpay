@@ -8,4 +8,4 @@ A visão geral organiza o trabalho em próximo movimento, indicadores, funil, ag
 
 A tela de autenticação mantém sua composição e recebe somente a marca. A impressão de propostas mantém seus estilos próprios. O painel inclui adaptações para telas estreitas e respeita a preferência por movimento reduzido.
 
-Validação: build e cinco testes de regras comerciais passaram localmente. A prévia local não respondeu no navegador desta sessão; a conferência visual será feita na publicação.
+Validação: build e cinco testes de regras comerciais passaram localmente e no GitHub Actions (run 44009367756). Cloudflare publicou o commit 3fe59bc em produção. No endereço público, foram conferidos o painel de demonstração, a marca, os indicadores e a abertura do formulário pela ação Criar proposta. A revisão visual em tela estreita continua pendente.
