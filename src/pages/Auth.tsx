@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react'
 import { ArrowRight, Layers, ShieldCheck, TrendingUp } from 'lucide-react'
 import { supabase } from '../lib/supabase'
 import { useStore } from '../lib/store'
+import Logo from '../components/Logo'
 export default function Auth(){
  const {setDemo}=useStore()
  const [mode,setMode]=useState<'login'|'signup'|'reset'>('login')
@@ -18,7 +19,7 @@ export default function Auth(){
   }catch(e){setMessage(e instanceof Error?e.message:'Não foi possível entrar.')}
   finally{setBusy(false)}
  }
- return <main className="auth-shell"><section className="auth-story"><div className="auth-brand">flow<span>.pay</span></div><p className="eyebrow">MENOS PLANILHAS. MAIS NEGÓCIOS.</p><h1>Seu próximo<br/>passo começa<br/>com um bom fluxo.</h1><p>Clientes, propostas e próximos contatos.<br/>Tudo no lugar para você vender com clareza.</p><div className="story-points"><span><Layers size={18}/> Sua operação conectada</span><span><TrendingUp size={18}/> Cada negociação à vista</span><span><ShieldCheck size={18}/> Uma conta só sua</span></div><small>GESTÃO COMERCIAL PARA QUEM FAZ ACONTECER</small></section>
+ return <main className="auth-shell"><section className="auth-story"><div className="auth-brand"><Logo inverse/></div><p className="eyebrow">MENOS PLANILHAS. MAIS NEGÓCIOS.</p><h1>Seu próximo<br/>passo começa<br/>com um bom fluxo.</h1><p>Clientes, propostas e próximos contatos.<br/>Tudo no lugar para você vender com clareza.</p><div className="story-points"><span><Layers size={18}/> Sua operação conectada</span><span><TrendingUp size={18}/> Cada negociação à vista</span><span><ShieldCheck size={18}/> Uma conta só sua</span></div><small>GESTÃO COMERCIAL PARA QUEM FAZ ACONTECER</small></section>
  <section className="auth-form"><p className="eyebrow">BEM-VINDO AO FLOW.PAY</p><h2>{mode==='signup'?'Comece um novo fluxo':mode==='reset'?'Recupere seu acesso':'Bom ter você por aqui'}</h2><p className="muted">Versão de testes gratuita. Sem cartão de crédito.</p>
  <form onSubmit={submit}><label>E-mail<input type="email" autoComplete="email" required value={email} onChange={e=>setEmail(e.target.value)}/></label>{mode!=='reset'&&<label>Senha<input type="password" minLength={8} required autoComplete={mode==='signup'?'new-password':'current-password'} value={password} onChange={e=>setPassword(e.target.value)}/></label>}
  <button className="button primary" disabled={busy||!supabase}>{busy?'Aguarde…':mode==='signup'?'Criar minha conta':mode==='reset'?'Enviar instruções':'Entrar'}<ArrowRight size={16}/></button></form>

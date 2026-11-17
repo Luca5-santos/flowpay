@@ -1,5 +1,6 @@
 import { NavLink, Outlet, Link, useLocation } from 'react-router-dom'
-import { FileText, LayoutDashboard, LogOut, Menu, Settings, Target, Users, CalendarClock, ChartNoAxesCombined, ArrowUpRight, RefreshCw } from 'lucide-react'
+import { FileText, LayoutDashboard, LogOut, Menu, Settings, Target, Users, CalendarClock, ChartNoAxesCombined, RefreshCw } from 'lucide-react'
+import Logo from '../components/Logo'
 import { useState } from 'react'
 import { useStore } from '../lib/store'
 import { today } from '../lib/domain.mjs'
@@ -19,7 +20,7 @@ export default function AppLayout(){
  const due=data.followups.filter(f=>!f.done&&f.due_date<=today()).length
  async function leave(){try{await logout()}catch(e){setMessage(e instanceof Error?e.message:'Não foi possível sair.')}}
  return <div className="app-shell"><aside className={'sidebar '+(mobileOpen?'sidebar-open':'')}>
- <Link className="brand" to="/"><div className="brand-mark"><ArrowUpRight size={24}/></div><div><strong>flow<span>.pay</span></strong><small>GESTÃO COMERCIAL</small></div></Link>
+ <Link className="brand" to="/" aria-label="Flow.pay — início"><Logo inverse/></Link>
  <div className="workspace"><div className="workspace-avatar">{data.profile.company_name.slice(0,1).toUpperCase()}</div><div><strong>{data.profile.company_name}</strong><small>{demo?'Demonstração':'Plano de testes gratuito'}</small></div></div>
  <p className="nav-caption">SEU ESPAÇO DE NEGÓCIOS</p><nav className="nav-list">{nav.map(({to,label,icon:Icon})=><NavLink to={to} key={to} end={to==='/'} onClick={()=>setMobileOpen(false)} className={({isActive})=>'nav-link '+(isActive?'active':'')}><Icon size={18}/><span>{label}</span>{to==='/follow-ups'&&due>0&&<i className="nav-count">{due}</i>}</NavLink>)}</nav>
  <div className="sidebar-bottom"><div className="help-card"><strong>Um passo de cada vez.</strong><p>Cadastre um cliente, crie uma proposta e agende o próximo contato.</p><Link to="/clientes">Começar pelos clientes →</Link></div><NavLink to="/configuracoes" className="nav-link"><Settings size={18}/>Configurações</NavLink><button className="nav-link logout" onClick={()=>void leave()}><LogOut size={18}/>{demo?'Sair da demonstração':'Sair da conta'}</button><div className="profile"><div className="profile-avatar">{demo?'DE':(session?.user.email??'FL').slice(0,2).toUpperCase()}</div><div><strong>{demo?'Visitante':session?.user.email}</strong><small>Seu fluxo, organizado.</small></div></div></div></aside>
